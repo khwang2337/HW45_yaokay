@@ -1,9 +1,4 @@
-//Team VT - Jordan Louie and Kevin Hwang
-//APCS1 pd5
-//HW44 -- This or That or Fourteen Other Things
-//2015-12-08
-
-public class Hexadecimal {
+public class Hexadecimal implements Comparable{
     
     private final static String HEXDIGITS = "0123456789ABCDEF"; 
     private int _decNum;
@@ -68,6 +63,8 @@ public class Hexadecimal {
     
    
     public int compareTo( Object other ) {
+        if (other.equals(null)) throw new NullPointerException("\nMy second error message "+" compareTo() input is null");
+        if (! (other instanceof Hexadecimal)) throw new ClassCastException("\nMy first error message "+" compareTo() input not a Hexadecimal");
     	return this._decNum - ((Hexadecimal)other)._decNum;
     }
     
