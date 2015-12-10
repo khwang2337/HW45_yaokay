@@ -1,9 +1,12 @@
 public class Rational implements Comparable {
+  	
   	public int numerator, denominator;
+  	public double _decNum;
 
   	public Rational() {
   		numerator = 0;
   		denominator = 1;
+  		_decNum = floatValue();
   	}
 
   	public Rational(int newn, int newd) {
@@ -15,11 +18,13 @@ public class Rational implements Comparable {
   		else {
   			System.out.println("You have tried to divide by 0. Time to die.");
   		}
+  		_decNum = floatValue();
   	}
 
   	public void setRational(int newn, int newd) {
   		numerator = newn;
 		denominator = newd;  //helper to make the test cases more organized, but not really necessary
+		_decNum = floatValue();
 	}
 
 	public String toString() {
@@ -33,23 +38,27 @@ public class Rational implements Comparable {
     public void multiply(Rational tom) {   //tom is tomultiply
     	numerator *= tom.numerator;
     	denominator *= tom.denominator;
+    	_decNum = floatValue();
     }
 
     public void divide(Rational tod) {      //tod is todivide
     	numerator *= tod.denominator;
     	denominator *= tod.numerator;
+    	_decNum = floatValue();
     }
 
     public void add(Rational toad) {           // toad is toadd
     	numerator*=toad.denominator;
     	numerator+=(toad.numerator*denominator);
     	denominator*=toad.denominator;
+    	_decNum = floatValue();
     }
 
     public void subtract(Rational toss) {      //toss is tosubtract
     	numerator*=toss.denominator;
     	numerator-=(toss.numerator*denominator);
     	denominator*=toss.denominator;
+    	_decNum = floatValue();
     }
 
     public int gcd() {
@@ -91,11 +100,9 @@ public class Rational implements Comparable {
 	}
 	
 	public int compareTo (Object O) { //implements compareTo method in Comparable.java-+-returns 0 if O's value is equal to the value, 1 is smaller, and -1 if larger
-		double one = numerator/denominator;
-		double two = ((Rational)O).numerator/((Rational)O).denominator; //needs a typecast
-		if ( equals( (Rational) O) ) return 0; //^^^
-		else if (one > two) return 1;
-		else return -1;
+		if (other.equals(null)) throw new NullPointerException("\nMy second error message "+" compareTo() input is null");
+      	if (! (other instanceof Rational)) throw new ClassCastException("\nMy first error message "+" compareTo() input not a Rational");
+      	return (int)(_decNum - ((Rational)other)._decNum);
 	}
 
     public static void main(String[] args) { //tests all methods and constructors
